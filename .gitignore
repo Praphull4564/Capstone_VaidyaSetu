@@ -1,0 +1,32 @@
+# Python environments and generated files
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+
+# Local configuration and credentials
+**/.env
+**/.env.*
+!**/.env.example
+**/*.pem
+**/*.key
+
+# Local databases, runtime data, and uploads
+**/instance/
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Downloaded/local machine-learning models (the bundled GGUF is ~4.7 GB)
+**/*.gguf
+**/*.safetensors
+**/*.pt
+**/*.pth
+**/*.onnx
+**/*.tflite
+**/*.ckpt
+VaidyaSaransh/Ollama/
+VaidyaDrishti/models/

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dae6ed">
+  <title>VaidyaSathi | AI Healthcare Assistant</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="video-container" aria-hidden="true"><video autoplay muted loop playsinline><source src="{{ url_for('static', filename='bg_vid.mp4') }}" type="video/mp4"></video></div>
+  <header class="brand-header"><a href="/" aria-label="VaidyaSathi home"><img src="{{ url_for('static', filename='Logo.png') }}" alt="VaidyaSetu" class="logo"></a><p class="module-label">VAIDYASETU <span>/</span> VAIDYASATHI</p></header>
+  <main class="container sathi-container">
+    <section class="assistant-card card bg-dark text-white" aria-labelledby="page-title">
+      <div class="card-body">
+        <div class="assistant-top"><div><p class="module-kicker">AI HEALTHCARE ASSISTANT</p><h1 id="page-title">How can I help<br><span>you today?</span></h1></div><span class="online-status"><i></i> LOCAL ASSISTANT</span></div>
+        <p class="lead-copy">Ask general health questions, explain symptoms, or unpack medical language in a calm, clear conversation.</p>
+        <div id="conversation" class="conversation" aria-live="polite"><div class="message assistant-message"><span class="message-label">VAIDYASATHI</span><p>Hello. I’m VaidyaSathi, here to help you understand health information. What would you like to discuss?</p></div></div>
+        <div class="quick-actions" aria-label="Starter questions"><button type="button" data-prompt="Explain my symptoms in simple language.">Explain my symptoms</button><button type="button" data-prompt="What does this medical term mean?">Explain a medical term</button><button type="button" data-prompt="What should I discuss with my doctor?">Prepare for my doctor</button></div>
+        <div id="image-preview" class="image-preview" hidden><img id="preview-image" alt="Selected health image preview"><button type="button" id="remove-image" aria-label="Remove selected image">×</button></div>
+        <form id="chat-form" class="chat-form"><input id="image-input" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="visually-hidden"><label for="image-input" class="icon-button" title="Attach an image" aria-label="Attach an image">+</label><label for="message-input" class="visually-hidden">Your health question</label><textarea id="message-input" rows="1" maxlength="4000" placeholder="Type your health question..." autocomplete="off"></textarea><button id="send-button" class="send-button" type="submit" aria-label="Send message">↑</button></form>
+        <p id="chat-error" class="chat-error" role="alert" hidden></p>
+        <div id="thinking" class="thinking" hidden aria-live="polite"><span class="spinner"></span> VaidyaSathi is thinking...</div>
+        <p class="safety-notice">VaidyaSathi provides general information and does not diagnose conditions or replace a healthcare professional. For medication changes or urgent symptoms, contact a qualified healthcare professional or local emergency services.</p>
+      </div>
+    </section>
+    <footer class="page-footer">VAIDYASETU <span>·</span> AI HEALTH INFORMATION, MADE CLEAR</footer>
+  </main>
+</body>
+</html>

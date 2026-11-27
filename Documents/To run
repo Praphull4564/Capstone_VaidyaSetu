@@ -1,0 +1,15 @@
+VaidyaSetu local run instructions
+
+For prerequisites and complete Windows PowerShell setup steps for every project,
+see the repository-root RUN_GUIDE.md file.
+
+Each runnable app has its own .env.example. Copy it to .env locally and fill
+in any required credentials. Never upload .env, private certificates, database
+files, virtual environments, or model weights.
+
+VaidyaSathi and VaidyaSaransh need Ollama and a model downloaded locally with
+`ollama pull llama3.1` (or another compatible model selected in that app's .env).
+VaidyaSamvaad needs a local self-signed certificate. VaidyaSanchay needs a
+Gemini API key in its local .env.
+
+VaidyaDrishti currently has no runnable application source or dependency file.

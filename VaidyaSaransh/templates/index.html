@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dae6ed">
+  <title>VaidyaSaransh | Medical report simplification</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="video-container" aria-hidden="true">
+    <video autoplay muted loop playsinline>
+      <source src="{{ url_for('static', filename='bg_vid.mp4') }}" type="video/mp4">
+    </video>
+  </div>
+  <header class="brand-header">
+    <a href="/" aria-label="VaidyaSaransh home"><img src="{{ url_for('static', filename='Logo.png') }}" alt="VaidyaSetu" class="logo"></a>
+    <p class="module-label">VAIDYASETU <span>/</span> VAIDYASARANSH</p>
+  </header>
+
+  <main class="container saransh-container">
+    <section class="card bg-dark text-white saransh-card" aria-labelledby="page-title">
+      <div class="card-body">
+        <p class="module-kicker">MEDICAL REPORT SIMPLIFICATION</p>
+        <h1 id="page-title">Understand your report<br><span>in simpler language.</span></h1>
+        <p class="lead-copy">A clearer explanation of the information in your medical report, to help you prepare for a conversation with your doctor.</p>
+
+        <form id="upload-form" novalidate>
+          <input id="report-file" name="report" type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg" class="visually-hidden" aria-describedby="file-help upload-error">
+          <label for="report-file" id="drop-zone" class="drop-zone">
+            <span class="upload-symbol" aria-hidden="true">↑</span>
+            <span class="drop-title">Choose a medical report</span>
+            <span class="drop-help" id="file-help">Drop a PDF, JPG, JPEG, or PNG here, or browse files. Maximum size: 15 MB.</span>
+          </label>
+          <p class="privacy-note">The report is processed in memory and not retained by this app. Analysis uses the Ollama server configured for this module.</p>
+          <div id="selected-file" class="selected-file" hidden>
+            <span class="file-symbol" aria-hidden="true">▤</span>
+            <span class="file-name" id="file-name"></span>
+            <button type="button" id="remove-file" class="remove-file" aria-label="Remove selected report">×</button>
+          </div>
+          <div id="report-preview" class="report-preview" hidden>
+            <img id="image-preview" alt="Preview of selected medical report image" hidden>
+            <a id="pdf-preview" target="_blank" rel="noopener noreferrer" hidden>Preview PDF in a new tab</a>
+            <p>Preview stays in this browser. The report is uploaded only when you simplify it.</p>
+          </div>
+          <p id="upload-error" class="upload-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary simplify-button" id="submit-button" disabled>Simplify Report</button>
+        </form>
+
+        <section id="processing" class="processing" hidden aria-live="polite" aria-busy="false">
+          <span class="spinner" aria-hidden="true"></span>
+          <span id="processing-message">Preparing your report...</span>
+          <ol class="processing-steps">
+            <li>Upload report</li>
+            <li>Extract readable information</li>
+            <li>Prepare simplified explanation</li>
+          </ol>
+        </section>
+
+        <p class="safety-notice">VaidyaSaransh helps simplify medical reports and does not provide a medical diagnosis. AI-generated explanations may contain errors. Please discuss important findings with a qualified healthcare professional.</p>
+      </div>
+    </section>
+
+    <section id="results" class="results card bg-dark text-white" hidden aria-live="polite" aria-labelledby="results-title">
+      <div class="card-body">
+        <div class="results-heading">
+          <div><p class="module-kicker">YOUR REPORT, EXPLAINED</p><h2 id="results-title">Simplified report</h2></div>
+          <button type="button" id="another-report" class="btn btn-outline-light another-button">Analyze another report</button>
+        </div>
+        <div id="overview" class="overview-grid"></div>
+        <section class="result-section"><h3>Overall summary</h3><p id="overall-summary" class="summary-copy"></p></section>
+        <section class="result-section"><h3>Key findings</h3><div id="key-findings" class="findings-grid"></div></section>
+        <section class="result-section"><h3>Important observations</h3><div id="observations" class="stacked-items"></div></section>
+        <section class="result-section"><h3>Medical terms explained</h3><div id="medical-terms" class="terms-grid"></div></section>
+        <section class="result-section"><h3>Questions for your doctor</h3><ul id="doctor-questions" class="question-list"></ul></section>
+        <section class="result-section"><h3>Information limitations</h3><ul id="limitations" class="limitation-list"></ul></section>
+        <p class="safety-notice results-safety">VaidyaSaransh helps simplify medical reports and does not provide a medical diagnosis. AI-generated explanations may contain errors. Please discuss important findings with a qualified healthcare professional.</p>
+      </div>
+    </section>
+    <footer class="page-footer">VAIDYASETU <span>·</span> MEDICAL INFORMATION, MADE CLEAR</footer>
+  </main>
+</body>
+</html>

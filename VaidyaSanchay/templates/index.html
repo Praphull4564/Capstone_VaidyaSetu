@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#dce8eb">
+  <title>VaidyaSanchay | Medication schedule</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body>
+  <div class="video-container" aria-hidden="true">
+    <video autoplay muted loop playsinline>
+      <source src="{{ url_for('static', filename='bg_vid.mp4') }}" type="video/mp4">
+    </video>
+  </div>
+  <header class="brand-header">
+    <img class="brand-logo" src="{{ url_for('static', filename='Logo.png') }}" alt="VaidyaSetu">
+    <div class="brand-caption"><span class="brand-dot"></span> VAIDYASETU <span class="caption-divider">/</span> VAIDYASANCHAY</div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro-row" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">MEDICATION MANAGEMENT</p>
+        <h1 id="page-title">Your medicines,<br><span>in one clear plan.</span></h1>
+        <p class="intro-copy">Turn your doctor's instructions into a schedule you can follow, one reminder at a time.</p>
+      </div>
+      <div class="date-chip"><span class="status-light"></span> PRESCRIPTION-LED SCHEDULING</div>
+    </section>
+
+    <section class="workspace" aria-label="Medication schedule workspace">
+      <div class="input-panel">
+        <div class="panel-heading">
+          <div class="step-number">01</div>
+          <div><p class="eyebrow">SOURCE INFORMATION</p><h2>Start with the prescription</h2></div>
+        </div>
+        <form id="schedule-form">
+          <label for="prescription">Prescription or medication instructions</label>
+          <textarea id="prescription" name="prescription" maxlength="12000" required placeholder="Paste the doctor's instructions here. Include medicine names, dose, frequency, duration, and any food or timing instructions."></textarea>
+          <div class="field-meta"><span>Text is sent to Gemini to organize. It is not saved by this app.</span><span id="character-count">0 / 12000</span></div>
+
+          <label for="routine" class="routine-label">Your usual routine <span>OPTIONAL</span></label>
+          <input id="routine" name="routine" type="text" maxlength="1200" placeholder="For example: breakfast at 8:00, lunch at 13:00, dinner at 19:00">
+          <p class="field-hint">Only share times that help place instructions such as morning, evening, or with meals.</p>
+
+          <button class="primary-button" id="submit-button" type="submit">
+            <span class="button-label">Prepare my schedule</span><span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+          <p class="form-error" id="form-error" role="alert" hidden></p>
+        </form>
+        <div class="privacy-note"><span class="lock-mark" aria-hidden="true">◈</span><span>Your prescription is processed for this request only and is not stored.</span></div>
+      </div>
+
+      <aside class="care-panel">
+        <div class="care-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="eyebrow">BUILT AROUND YOUR DOCTOR'S PLAN</p>
+        <h2>Clear instructions.<br>Nothing guessed.</h2>
+        <ul class="promise-list">
+          <li><span>01</span><p>Doses and frequency stay exactly as prescribed.</p></li>
+          <li><span>02</span><p>Missing or conflicting details are clearly flagged.</p></li>
+          <li><span>03</span><p>Reminders use only times supported by your instructions.</p></li>
+        </ul>
+        <div class="care-footer"><span class="pulse-dot"></span> YOUR PRESCRIPTION IS THE SOURCE OF TRUTH</div>
+      </aside>
+    </section>
+
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results-heading">
+        <div><p class="eyebrow">YOUR PREPARED PLAN</p><h2>Your medication schedule</h2></div>
+        <button class="text-button" id="new-schedule" type="button">New schedule <span aria-hidden="true">↗</span></button>
+      </div>
+      <p class="result-summary">Your medication schedule has been prepared from the provided prescription.</p>
+      <div class="notice-list" id="notices"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Medicine</th><th>Dose</th><th>Time</th><th>Food relation</th><th>Duration</th></tr></thead>
+          <tbody id="schedule-rows"></tbody>
+        </table>
+      </div>
+      <div class="calendar-box">
+        <div class="calendar-copy"><span class="calendar-icon" aria-hidden="true">▦</span><div><h3>Take your reminders with you</h3><p>Select a start date, then add each timed reminder to Google Calendar. Events are added for that date only.</p></div></div>
+        <label for="calendar-date">Schedule date</label>
+        <input id="calendar-date" type="date">
+        <div class="calendar-events" id="calendar-events"></div>
+      </div>
+      <div class="reminder-summary"><p class="eyebrow">REMINDER SUMMARY</p><p id="reminder-summary-text"></p></div>
+      <details class="json-details"><summary>View structured schedule data</summary><pre id="json-output"></pre></details>
+      <p class="medical-disclaimer">This tool organizes information; it does not provide medical advice. For a change or unclear instruction, contact the prescribing doctor or pharmacist. Seek urgent care for a serious or potentially emergency reaction.</p>
+    </section>
+    <footer class="page-footer"><span>VAIDYASETU</span><span>MEDICATION INFORMATION, MADE CLEAR</span></footer>
+  </main>
+</body>
+</html>
